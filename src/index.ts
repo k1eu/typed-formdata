@@ -1,2 +1,2 @@
 export { TypedFormData } from "./typed-formdata.js";
-export { parseFormDataRequest } from "./parsers.js";
+export { parseFormDataRequest, parseFormData } from "./parsers.js";

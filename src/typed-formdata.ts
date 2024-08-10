@@ -1,4 +1,4 @@
-class TypedFormData<T extends Record<string, string | File>>
+export class TypedFormData<T extends Record<string, string | File>>
   implements FormData
 {
   private formData: FormData = new FormData();
@@ -99,5 +99,3 @@ class TypedFormData<T extends Record<string, string | File>>
     yield* this.entries();
   }
 }
-
-export { TypedFormData };
