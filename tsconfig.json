@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ES2020", "DOM.Iterable"],
+    "module": "NodeNext",
+    "target": "ES6",
+    "moduleResolution": "NodeNext",
+    "strict": true
+  }
+}
