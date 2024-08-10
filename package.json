@@ -1,6 +1,6 @@
 {
   "name": "@k1eu/typed-formdata",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A typed version of FormData",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
