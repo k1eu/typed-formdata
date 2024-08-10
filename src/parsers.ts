@@ -7,4 +7,10 @@ async function parseFormDataRequest<T extends Record<string, string | File>>(
   return new TypedFormData<T>(formData);
 }
 
-export { parseFormDataRequest };
+function parseFormData<T extends Record<string, string | File>>(
+  formData: FormData
+): TypedFormData<T> {
+  return new TypedFormData<T>(formData);
+}
+
+export { parseFormDataRequest, parseFormData };

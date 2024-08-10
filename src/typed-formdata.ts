@@ -2,12 +2,16 @@ class TypedFormData<T extends Record<string, string | File>>
   implements FormData
 {
   formData: FormData = new FormData();
-  constructor(formElement: HTMLFormElement | FormData) {
-    if (formElement instanceof FormData) {
-      this.formData = formElement;
+  constructor(initElement?: HTMLFormElement | FormData) {
+    if (!initElement) {
       return;
     }
-    this.formData = new FormData(formElement);
+    if (initElement instanceof FormData) {
+      this.formData = initElement;
+      return;
+    }
+
+    this.formData = new FormData(initElement);
   }
 
   public get<K extends keyof T>(key: Extract<K, string>): T[K] {
@@ -31,7 +35,7 @@ class TypedFormData<T extends Record<string, string | File>>
       parent: FormData
     ) => void,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    thisArg?: any
+    thisArg?: unknown
   ): void {
     this.formData.forEach(callbackfn, thisArg);
   }
@@ -60,6 +64,9 @@ class TypedFormData<T extends Record<string, string | File>>
     return this.formData.values();
   }
 
+  public set(key: keyof T, value: T[keyof T]): void;
+  public set(key: string, value: string): void;
+  public set(key: string, value: Blob): void;
   public set(key: string, value: string | Blob, filename?: string): void {
     if (typeof value === "string") {
       this.formData.set(key, value);
@@ -68,6 +75,9 @@ class TypedFormData<T extends Record<string, string | File>>
     }
   }
 
+  public append(key: keyof T, value: T[keyof T]): void;
+  public append(key: string, value: string): void;
+  public append(key: string, value: Blob): void;
   public append(key: string, value: string | Blob, filename?: string): void {
     if (typeof value === "string") {
       this.formData.append(key, value);
