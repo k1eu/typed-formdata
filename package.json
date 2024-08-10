@@ -4,7 +4,8 @@
   "description": "A typed version of FormData",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --outDir dist --project tsconfig.lib.json"
+    "clean": "rm -rf dist",
+    "build": "pnpm run clean && tsc --outDir dist --project tsconfig.lib.json"
   },
   "keywords": [
     "FormData",
