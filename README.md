@@ -73,7 +73,7 @@ function MyPage() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const formData = new TypedFormData(e.currentTarget);
+        const formData = new TypedFormData<MyFormData>(e.currentTarget);
         const login: string = formData.get("login");
         const password: string = formData.get("password");
         loginAndSubmit(login, password);
