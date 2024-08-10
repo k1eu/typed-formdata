@@ -1,7 +1,8 @@
 class TypedFormData<T extends Record<string, string | File>>
   implements FormData
 {
-  formData: FormData = new FormData();
+  private formData: FormData = new FormData();
+
   constructor(initElement?: HTMLFormElement | FormData) {
     if (!initElement) {
       return;
