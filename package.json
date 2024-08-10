@@ -16,7 +16,7 @@
   "author": "Tomasz Kielar <dev@k1eu.dev>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/k1eu/typed-formdata"
+    "url": "https://github.com/k1eu/typed-formdata.git"
   },
   "files": [
     "dist",
