@@ -3,7 +3,8 @@
   "version": "0.9.1",
   "description": "A typed version of FormData",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc --p ./tsconfig.test.json && vitest run --typecheck --dom",
+    "test:watch": "vitest --typecheck",
     "build": "tsc --outDir dist --project tsconfig.lib.json"
   },
   "keywords": [
@@ -33,6 +34,9 @@
   "packageManager": "pnpm@9.4.0",
   "devDependencies": {
     "@types/node": "^22.2.0",
-    "typescript": "^5.5.4"
+    "happy-dom": "^14.12.3",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "vitest": "^2.0.5"
   }
 }

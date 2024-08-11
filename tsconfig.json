@@ -4,6 +4,8 @@
     "module": "NodeNext",
     "target": "ES6",
     "moduleResolution": "NodeNext",
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "src"
   }
 }
