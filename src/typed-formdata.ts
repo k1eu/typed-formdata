@@ -15,8 +15,8 @@ export class TypedFormData<T extends Record<string, string | File>>
     this.formData = new FormData(initElement);
   }
 
-  public get<K extends keyof T>(key: Extract<K, string>): T[K] {
-    return this.formData.get(key) as T[K];
+  public get<K extends keyof T>(key: Extract<K, string>): T[K] | null {
+    return this.formData.get(key) as T[K] | null;
   }
 
   public getAll(key: string): FormDataEntryValue[] {
@@ -65,10 +65,17 @@ export class TypedFormData<T extends Record<string, string | File>>
     return this.formData.values();
   }
 
-  public set(key: keyof T, value: T[keyof T]): void;
-  public set(key: string, value: string): void;
-  public set(key: string, value: Blob): void;
-  public set(key: string, value: string | Blob, filename?: string): void {
+  public set(
+    key: keyof T,
+    value: T[keyof T] extends File ? Blob : string
+  ): void;
+  public set(key: keyof T, value: string): void;
+  public set(key: keyof T, value: Blob): void;
+  public set(
+    key: Extract<keyof T, string>,
+    value: string | Blob,
+    filename?: string
+  ): void {
     if (typeof value === "string") {
       this.formData.set(key, value);
     } else {
@@ -76,10 +83,17 @@ export class TypedFormData<T extends Record<string, string | File>>
     }
   }
 
-  public append(key: keyof T, value: T[keyof T]): void;
-  public append(key: string, value: string): void;
-  public append(key: string, value: Blob): void;
-  public append(key: string, value: string | Blob, filename?: string): void {
+  public append(
+    key: keyof T,
+    value: T[keyof T] extends File ? Blob : string
+  ): void;
+  public append(key: keyof T, value: string): void;
+  public append(key: keyof T, value: Blob): void;
+  public append(
+    key: Extract<keyof T, string>,
+    value: string | Blob,
+    filename?: string
+  ): void {
     if (typeof value === "string") {
       this.formData.append(key, value);
     } else {
@@ -87,11 +101,11 @@ export class TypedFormData<T extends Record<string, string | File>>
     }
   }
 
-  public has(key: string): boolean {
+  public has(key: Extract<keyof T, string>): boolean {
     return this.formData.has(key);
   }
 
-  public delete(key: string): void {
+  public delete(key: Extract<keyof T, string>): void {
     this.formData.delete(key);
   }
 
