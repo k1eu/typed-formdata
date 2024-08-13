@@ -255,5 +255,34 @@ describe("TypedFormData", () => {
         >();
       });
     });
+
+    describe("Fetch API body", () => {
+      it("should take TypedFormData as body", () => {
+        const typedFormData = new TypedFormData<TestForm>();
+        typedFormData.set("name", "John");
+        typedFormData.set("age", "30");
+
+        fetch("https://example.com", {
+          method: "POST",
+          body: typedFormData,
+        });
+      });
+    });
+
+    describe("In place of FormData in any functions", () => {
+      it("should allow to use TypedFormData in any functions", () => {
+        const typedFormData = new TypedFormData<TestForm>();
+        typedFormData.set("name", "John");
+        typedFormData.set("age", "30");
+
+        function test(formData: FormData) {
+          console.log(formData.get("name"));
+        }
+
+        // INFO: should not be ts error - if not red thats good
+        test(typedFormData);
+        expectTypeOf(test).toBeCallableWith(typedFormData);
+      });
+    });
   });
 });
